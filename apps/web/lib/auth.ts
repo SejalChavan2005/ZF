@@ -8,6 +8,19 @@ export async function signUp(
     formData: FormData
 ): Promise<FormState> {
 
+    //..
+  const password = formData.get("password") as string;
+  const confirmPassword = formData.get("confirmPassword") as string;
+
+  
+  if (password !== confirmPassword) {
+    return {
+      error: {
+        password: ["Passwords do not match."], // Will be shown in frontend
+      },
+    };
+  }
+//..
     const validationFields = SignupFormSchema.safeParse({
         name: formData.get("name"),
         email: formData.get("email"),
